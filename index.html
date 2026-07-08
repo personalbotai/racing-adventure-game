@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Racing Adventure 3D</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container"></div>
+    
+    <div id="ui-overlay">
+        <div id="start-screen">
+            <h1>Racing Adventure</h1>
+            <p>Gunakan WASD atau Arrow Keys untuk mengendarai mobil</p>
+            <button id="start-btn">Mulai Permainan</button>
+        </div>
+        
+        <div id="game-ui" class="hidden">
+            <div id="score-display">Skor: 0</div>
+            <div id="time-display">Waktu: 0s</div>
+        </div>
+        
+        <div id="game-over" class="hidden">
+            <h1>Permainan Selesai!</h1>
+            <p id="final-score">Skor Akhir: 0</p>
+            <button id="restart-btn">Main Lagi</button>
+        </div>
+    </div>
+    
+    <script type="module" src="main.js"></script>
+</body>
+</html>
