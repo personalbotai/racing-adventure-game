@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-let scene, camera, renderer, car, trackPath = [], checkpoints = [], coins = [], particles = [];
+let scene, camera, renderer, car, track = [], trackPath = [], checkpoints = [], coins = [], particles = [];
 let gameState = 'start';
 let score = 0;
 let startTime = 0;
