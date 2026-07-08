@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-let scene, camera, renderer, car, track = [], trackPath = [], checkpoints = [], coins = [], particles = [];
+let scene, camera, renderer, car, track = [], trackPath = [], checkpoints = [], coins = [], particles = [], curbs = [], trees = [], rocks = [];
 let gameState = 'start';
 let score = 0;
 let startTime = 0;
@@ -246,6 +246,7 @@ function createTrack() {
             leftCurb.castShadow = true;
             leftCurb.receiveShadow = true;
             scene.add(leftCurb);
+            curbs.push(leftCurb);
             
             const rightCurb = new THREE.Mesh(curbGeo, curbMat);
             rightCurb.position.set(rightCurbP.x, 0.75, rightCurbP.z);
@@ -253,6 +254,7 @@ function createTrack() {
             rightCurb.castShadow = true;
             rightCurb.receiveShadow = true;
             scene.add(rightCurb);
+            curbs.push(rightCurb);
         }
     }
 }
@@ -533,6 +535,7 @@ function createEnvironment() {
             const scale = 0.6 + Math.random() * 0.8;
             treeGroup.scale.set(scale, scale, scale);
             scene.add(treeGroup);
+            trees.push(treeGroup);
         }
     }
 
@@ -578,6 +581,7 @@ function createEnvironment() {
             rock.castShadow = true;
             rock.receiveShadow = true;
             scene.add(rock);
+            rocks.push(rock);
         }
     }
 }
@@ -684,8 +688,41 @@ function updateGame() {
     }
 
     car.rotation.y = carRotation;
+    const oldX = car.position.x;
+    const oldZ = car.position.z;
     car.position.x += Math.sin(carRotation) * carSpeed;
     car.position.z += Math.cos(carRotation) * carSpeed;
+
+    // Collision detection
+    const carBox = new THREE.Box3().setFromObject(car);
+    let collision = false;
+    
+    curbs.forEach(curb => {
+        const curbBox = new THREE.Box3().setFromObject(curb);
+        if (carBox.intersectsBox(curbBox)) {
+            collision = true;
+        }
+    });
+    
+    trees.forEach(tree => {
+        const treeBox = new THREE.Box3().setFromObject(tree);
+        if (carBox.intersectsBox(treeBox)) {
+            collision = true;
+        }
+    });
+    
+    rocks.forEach(rock => {
+        const rockBox = new THREE.Box3().setFromObject(rock);
+        if (carBox.intersectsBox(rockBox)) {
+            collision = true;
+        }
+    });
+    
+    if (collision) {
+        car.position.x = oldX;
+        car.position.z = oldZ;
+        carSpeed = -carSpeed * 0.3; // Bounce back
+    }
 
     const cameraDistance = 22;
     const cameraHeight = 10;
