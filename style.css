@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -5,7 +7,7 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif;
     overflow: hidden;
     background: #000;
 }
@@ -33,62 +35,134 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.85);
-    padding: 40px;
-    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(10, 10, 30, 0.95), rgba(30, 10, 60, 0.9));
+    padding: 50px 60px;
+    border-radius: 30px;
     text-align: center;
     color: white;
-    box-shadow: 0 0 30px rgba(0, 200, 255, 0.3);
+    box-shadow: 
+        0 0 60px rgba(0, 255, 255, 0.4),
+        0 0 120px rgba(255, 0, 128, 0.2),
+        inset 0 0 80px rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(0, 255, 255, 0.3);
+    animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow: 
+            0 0 60px rgba(0, 255, 255, 0.4),
+            0 0 120px rgba(255, 0, 128, 0.2);
+    }
+    50% {
+        box-shadow: 
+            0 0 80px rgba(0, 255, 255, 0.6),
+            0 0 150px rgba(255, 0, 128, 0.4);
+    }
 }
 
 #start-screen h1, #game-over h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    color: #00c8ff;
-    text-shadow: 0 0 10px #00c8ff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3.5rem;
+    margin-bottom: 25px;
+    background: linear-gradient(135deg, #00ffff, #ff00ff, #00ffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+    letter-spacing: 3px;
 }
 
 #start-screen p, #game-over p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-    color: #ccc;
+    font-size: 1.3rem;
+    margin-bottom: 35px;
+    color: #a0a0ff;
+    line-height: 1.8;
 }
 
 #start-btn, #restart-btn {
-    padding: 15px 40px;
-    font-size: 1.3rem;
-    background: linear-gradient(135deg, #00c8ff, #0080ff);
+    padding: 18px 50px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #00ffff, #0080ff, #ff00ff);
+    background-size: 200% 200%;
     color: white;
     border: none;
-    border-radius: 30px;
+    border-radius: 50px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0, 200, 255, 0.4);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 
+        0 10px 40px rgba(0, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 #start-btn:hover, #restart-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 25px rgba(0, 200, 255, 0.6);
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 
+        0 15px 60px rgba(0, 255, 255, 0.6),
+        0 0 30px rgba(255, 0, 255, 0.4);
 }
 
 #game-ui {
     position: absolute;
-    top: 20px;
-    left: 20px;
-    right: 20px;
+    top: 30px;
+    left: 30px;
+    right: 30px;
     display: flex;
     justify-content: space-between;
+    gap: 20px;
 }
 
 #score-display, #time-display {
-    background: rgba(0, 0, 0, 0.7);
+    background: linear-gradient(135deg, rgba(0, 20, 40, 0.85), rgba(40, 0, 60, 0.85));
     color: white;
-    padding: 15px 25px;
-    border-radius: 10px;
-    font-size: 1.2rem;
-    border: 2px solid #00c8ff;
+    padding: 20px 35px;
+    border-radius: 20px;
+    font-size: 1.3rem;
+    border: 2px solid rgba(0, 255, 255, 0.4);
+    box-shadow: 
+        0 0 30px rgba(0, 255, 255, 0.2);
+    font-family: 'Orbitron', sans-serif;
+    backdrop-filter: blur(10px);
+}
+
+#controls-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 20, 40, 0.8);
+    color: #00ffff;
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-family: 'Orbitron', sans-serif;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
 }
 
 .hidden {
     display: none !important;
+}
+
+#coin-counter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#coin-icon {
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(135deg, #ffd700, #ffaa00);
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
 }

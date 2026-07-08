@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: '/',
+  base: '/racing-adventure-game/',
   build: {
     outDir: 'dist',
     emptyOutDir: true,
